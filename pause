@@ -1,0 +1,45 @@
+setDefaultTab("Tools")
+
+local keyDown = "Pause"
+
+
+onKeyPress(function(keys)
+	if keys == keyDown then
+		CaveBot:setOff()
+		TargetBot:setOff()
+		g_game.cancelAttackAndFollow()
+		if followMacro or AdvancedFollow then
+			followMacro.setOff()
+			AdvancedFollow.setOff()
+		end
+	end
+end)
+
+local modetalk = macro(2000, "Mode print", function() end)
+
+onTextMessage(function(mode,text)
+    if modetalk.isOff() then return end
+	local text = text:lower()
+	if string.find(text, 'exura') then
+		say(mode)
+		say(mode)
+	end
+end)
+
+onTalk(function(name, level, mode, text, channelId, pos)
+    if modetalk.isOff() then return end
+	local text = text:lower()
+	if text == 'exura' then
+        say(mode)
+		say(channelId)
+	end
+end)
+
+onTalk(function(name, level, mode, text, channelId, pos)
+    if modetalk.isOff() then return end
+	local text = text:lower()
+	if text == 'exura med ico' then
+        say(mode)
+		say(channelId)
+	end
+end)
